@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>HSRae.Protocol</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HSRae.Core\HSRae.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource
+      Include="Metadata\AchievementInfo.json"
+      LogicalName="HSRae.Metadata.AchievementInfo.json"
+    />
+  </ItemGroup>
+</Project>

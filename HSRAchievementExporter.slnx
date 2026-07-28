@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/HSRae.App/HSRae.App.csproj" />
+  <Project Path="src/HSRae.Core/HSRae.Core.csproj" />
+  <Project Path="src/HSRae.Formats/HSRae.Formats.csproj" />
+  <Project Path="src/HSRae.Hook/HSRae.Hook.csproj" />
+  <Project Path="src/HSRae.Protocol/HSRae.Protocol.csproj" />
+</Solution>

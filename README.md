@@ -14,8 +14,8 @@ HSRae 是 Windows x64 下的《崩坏：星穹铁道》国服成就导出工具�
 2. 运行构建产物 `HSRae_v<版本>_Release.exe`。
 3. 选择注册表中检测到的路径，或手动指定游戏目录 / `StarRail.exe`。
 4. 接受 Windows 管理员权限请求。
-5. 在由 HSRae 启动的游戏中正常登录。
-6. HSRae 捕获登录响应中的 UID 和完整任务快照后，会关闭本次启动的游戏并让你选择导出格式。
+5. 在由 HSRae 启动的游戏中正常登录，并打开成就页面。
+6. HSRae 捕获登录响应中的 UID 和完整成就快照后，会关闭本次启动的游戏并让你选择导出格式。
 
 可选命令行参数：
 
@@ -32,14 +32,16 @@ HSRae 是 Windows x64 下的《崩坏：星穹铁道》国服成就导出工具�
 `HSRae-achievements-<日期>.json`。备份保留：
 
 - UID、游戏版本、捕获时间与元数据版本；
-- 服务端返回的星铁成就记录；
+- 服务端返回的成就记录；
 - 成就 ID、任务状态、进度、完成时间；
-- 用于兼容未来字段的原始 protobuf varint 映射；
+- 用于兼容未来字段的原始 protobuf varint 映射，以及当前已确认字段 3 的 packed varint 数组；
 - 本次识别使用的命令号、字段路径和字段号。
 
 ### 由 HSRae 生成的 Liyin 格式
 
 `HSRae-liyin-<日期>.json`。这是 HSRae 生成、可供 Liyin 导入的文件。
+
+原始状态 `2`（已完成、奖励未领取）和 `3`（奖励已领取）都会导出为 Liyin 自己的完成状态 `3`；是否领取不会造成记录丢失。互斥组中其他“已选其他”分支由 Liyin 根据自己的 `MultipleChoice.json` 推导
 
 ### 实验性 UIAF v1.2
 
@@ -62,12 +64,10 @@ HSRae 是 Windows x64 下的《崩坏：星穹铁道》国服成就导出工具�
 .\build.ps1 -Configuration Release
 ```
 
-脚本会单独发布 NativeAOT Hook、将其嵌入单文件主程序，并校验最终文件名和 Windows 版本资源。Debug 构建会输出更详细的定位与包识别日志，但仍不会输出包正文。
+脚本会单独发布 NativeAOT Hook、将其嵌入单文件主程序，并校验最终文件名和 Windows 版本资源。Debug 构建会输出更详细的定位、命令分布和候选结构诊断，但仍不会输出包正文或 UID 以外的账号数据。
 
 ## 许可证
 
 本项目基于 `ZZZAchievementExporter` 的实现演化，使用[GNU General Public License v3.0](LICENSE)。
 
-星铁成就元数据
-[`src/HSRae.Protocol/Metadata/AchievementInfo.json`](src/HSRae.Protocol/Metadata/AchievementInfo.json)
-取自 [liyin.space 的 `src/jsons/AchievementInfo.json`](https://github.com/Ticca-Liyin/liyin.space/blob/master/src/jsons/AchievementInfo.json)。
+星铁成就元数据 [`src/HSRae.Protocol/Metadata/AchievementInfo.json`](src/HSRae.Protocol/Metadata/AchievementInfo.json) 取自 [liyin.space](https://github.com/Ticca-Liyin/liyin.space/blob/master/src/jsons/AchievementInfo.json)。
