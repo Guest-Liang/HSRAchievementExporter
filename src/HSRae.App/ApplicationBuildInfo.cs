@@ -2,7 +2,7 @@ namespace HSRae.App;
 
 internal static class ApplicationBuildInfo
 {
-    public const string Version = "1.0.0";
+    public const string Version = "1.1.0";
 
 #if DEBUG
     public const string Configuration = "Debug";
